@@ -1,0 +1,34 @@
+import random
+import time
+import os
+
+# 1 Presentación del Juego
+
+print("***********************************")
+print("***                             ***")
+print("*** Bienvenido al Juego de NIm  ***")
+print("***                             ***")
+print("***********************************")
+https://github.com/Firiosbhell/Juego-de-Nim.py/actions
+# 2 Elección de nivel
+nivel = input("Elige el nivel. Fácil o Difícil: ")
+
+# 3 Palillos totales
+p_t = [16, 23]
+palillos_totales = random.choice(p_t)
+palillos(palillos_totales)
+
+# 4 Quita de palillos
+q_p = [3, 4, 5]
+quita_palillos = random.choice(q_p)
+
+# 5 Turnos
+turno = 1
+if turno == 1:
+    turno -= 1
+else:
+    turno += 1
+
+# 6 Palillos en pantalla
+
+def palillos(n):

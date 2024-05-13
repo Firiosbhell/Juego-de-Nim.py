@@ -1,0 +1,83 @@
+import random
+import time
+import os
+
+# 1 Presentación del Juego
+def presentacion():
+    os.system("clear")
+    print("***********************************")
+    print("***                             ***")
+    print("*** Bienvenido al Juego de NIm  ***")
+    print("***                             ***")
+    print("***********************************")
+    print()
+    print("Gana quien recoge el últimos palillos")
+    print()
+    print("1- Facíl.")
+    print("2- Dificíl.")
+    print()
+    print()
+    dificultad()
+
+# 2 Elección de nivel
+def dificultad():
+    while nivel != 1 and nivel != 2:
+        nivel = int(input("Elige el nivel.(1/2): "))
+    return nivel
+
+# 3 Palillos totales
+p_t = [16, 17, 18, 19, 20, 21, 22, 23]
+palillos_totales = random.choice(p_t)
+def palillos(n):
+    os.system("clear") #OJO ESTO ACA CREO QUE DEBERIA IR EN EL BUCLE PRINCIPAL
+    print()
+    print()
+    for i in range(1,n+1):
+        print(" | ", end="")
+    print()
+    print()
+    print()
+
+
+# 4 Quita de palillos
+q_p = [3, 4, 5]
+q_palillos = []
+quita_palillos = random.choice(q_p)
+for i in range(1,len(quita_palillos+1)):
+    q_palillos.append(i)
+def quita():
+    q = 0
+    print()
+    while q < 1 and q > quita_palillos:
+        q = int(input("Número de palillos a quitar: "))
+    return q
+
+# 5 Turnos
+def turno():
+    turno = 1
+    if turno == 1:
+        turno -= 1
+    else:
+        turno += 1
+    return turno
+
+# 6 Palillos en pantalla
+def presentacion2():
+    os.system("clear")
+    print("***********************************")
+    print("*******   Juego de Nim ************")
+    print()
+    print()
+    print("Habrá un total de", p_t, "palillos.")
+    print("Se puede quitar entre 1 y", q_t,"palillos.")
+    print()
+    print("Empiezas a mover tu.")
+    print("***********************************")
+    input("Presiona 'Entrer' para continuar: ")
+
+#7 movimiento de ordenador aleatorio
+def movimiento_aleatorio():
+    print()
+    q = random.choice(q_palillos)
+    return q
+

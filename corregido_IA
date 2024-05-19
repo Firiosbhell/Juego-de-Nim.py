@@ -1,0 +1,129 @@
+import random
+import time
+import os
+
+# 1 Presentación del Juego
+def presentacion():
+    os.system("clear")
+    print("***********************************")
+    print("***                             ***")
+    print("*** Bienvenido al Juego de NIm  ***")
+    print("***                             ***")
+    print("***********************************")
+    print()
+    print("Gana quien recoge el últimos palillos")
+    print()
+    print("1- Facíl.")
+    print("2- Dificíl.")
+    print()
+    print()
+    niv = dificultad()
+    return niv
+
+# 2 Elección de nivel
+def dificultad():
+    nivel = None
+    while nivel != "1" and nivel != "2":
+        nivel = input("Elige el nivel.(1/2): ")
+    return nivel
+
+# 3 Palillos totales
+p_t = [16, 17, 18, 19, 20, 21, 22, 23]
+palillos_totales = random.choice(p_t)
+def palillos(n):
+    print("***********************************")
+    print("*******   Juego de Nim ************")
+    print()
+    print()
+    for i in range(1,n+1):
+        print(" | ", end="")
+    print()
+    print()
+    print("***********************************")
+
+
+# 4 Quita de palillos
+q_p = [3, 4, 5]
+q_palillos = []
+quita_palillos = random.choice(q_p)
+for i in range(1,quita_palillos+1):
+    q_palillos.append(i)
+def quita(quita_palillos):
+    q = 0
+    print()
+    while q < 1 or q > quita_palillos:
+        q = int(input("Número de palillos a quitar: "))
+    return q
+
+# 5 Turnos
+
+
+# 6 Palillos en pantalla
+def presentacion2(p_t,q_t):
+    os.system("clear")
+    print("***********************************")
+    print("*******   Juego de Nim ************")
+    print()
+    print()
+    print("Habrá un total de", p_t, "palillos.")
+    print("Se puede quitar entre 1 y", q_t,"palillos.")
+    print()
+    print("Empiezas a mover tu.")
+    print("***********************************")
+    input("Presiona 'Entrer' para continuar: ")
+
+#7 movimiento de ordenador aleatorio
+def movimiento_aleatorio(q_palillos,t):
+    time.sleep(2)
+    print()
+    q = random.choice(q_palillos)
+    if t <= 2:
+        q = t
+    return q
+
+#8 Ganador
+def ganador(p,t):
+    if p <= 0:
+        if t == 1:
+            print("Has Ganado.")
+        else:
+            print("Has Perdido.")
+
+#9 movimiento # IA
+def mov_IA(p,q):
+    """Determina el número X restar de los palillos totales en pantalla
+    dejando Quita mayor más uno o sus múltiplos"""
+    x = 0
+    time.sleep(2)
+    if p <= q:
+        x = p
+        return x
+    x = p % (q+1)
+    if x == 0:
+         x = random.choice([1,2])
+    return x
+
+#10 Bucle principal
+niv = presentacion()
+presentacion2(palillos_totales,quita_palillos)
+turno_actual = 1  # El jugador inicia
+
+
+while palillos_totales > 0:
+    os.system("clear")
+    print(f"Palillos restantes: {'| ' * palillos_totales}\n")
+
+    if turno_actual == 1:  # Turno del jugador
+        q = quita(quita_palillos)
+        print("Quitaste", q,"palillos.")
+    else:  # Turno del ordenador
+        if niv == "1":
+            q = movimiento_aleatorio(q_palillos,palillos_totales)
+        elif niv == "2":
+            q = mov_IA(palillos_totales,quita_palillos)
+        print(f"El ordenador quitó {q} palillos.")
+
+    palillos_totales -= q
+    ganador(palillos_totales, turno_actual)
+
+    turno_actual = 2 if turno_actual == 1 else 1
